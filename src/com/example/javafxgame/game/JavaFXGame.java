@@ -5,9 +5,11 @@ import com.example.javafxgame.input.GameInput;
 import com.example.javafxgame.level.GameLevel;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 
 public class JavaFXGame implements Runnable {
 
@@ -20,9 +22,7 @@ public class JavaFXGame implements Runnable {
 	private GameInput input;
 	private volatile GameLevel level = GameLevel.DEFAULT_LEVEL;
 	private Group root;
-
 	private Scene scene;
-
 	private Screen screen;
 	private final String title;
 	private final int width;
@@ -30,8 +30,8 @@ public class JavaFXGame implements Runnable {
 	public JavaFXGame(GameLevel level) {
 		this(DEFAULT_TITLE, DEFAULT_WIDTH, DEFAULT_HEIGHT, level);
 	}
-	
-	public Scene getGameScene(){
+
+	public Scene getGameScene() {
 		return scene;
 	}
 
@@ -43,7 +43,22 @@ public class JavaFXGame implements Runnable {
 		input = new GameInput();
 		level.setInput(input);
 		createNodes();
+		initInput();
 		screen = new Screen(canvas.getGraphicsContext2D(), width, height);
+	}
+
+	private void initInput() {
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent e) {
+				input.press(e.getCode().toString());
+			}
+		});
+
+		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent e) {
+				input.release(e.getCode().toString());
+			}
+		});
 	}
 
 	private final void createNodes() {
@@ -91,13 +106,7 @@ public class JavaFXGame implements Runnable {
 		new Thread(this).start();
 	}
 
-
 	protected void update(double t) {
-		updateInput();
 		level.update(t);
-	}
-
-	private void updateInput() {
-		// TODO: Handle user input
 	}
 }
