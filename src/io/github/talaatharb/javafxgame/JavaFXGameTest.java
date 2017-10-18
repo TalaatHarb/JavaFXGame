@@ -18,7 +18,7 @@ public class JavaFXGameTest extends Application {
 			JavaFXGame game = new JavaFXGame(GameLevel.DEFAULT_LEVEL);
 			primaryStage.setScene(game.getGameScene());
 			primaryStage.setTitle(game.getTitle());
-			primaryStage.setAlwaysOnTop(true);
+			// primaryStage.setAlwaysOnTop(true);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.show();
 			game.start();
