@@ -1,7 +1,6 @@
-package io.github.talaatharb.javafxgame;
+package io.github.talaatharb.javafxgame.scene;
 
 import io.github.talaatharb.javafxgame.scene.GameScene;
-import io.github.talaatharb.javafxgame.scene.TestGameScene;
 import javafx.scene.paint.Color;
 
 public interface TestGameScenes {

@@ -10,9 +10,12 @@ public interface Renderer {
 
 	public double getWidth();
 
-	public void renderFillRect(double x, double y, double w, double h, Color color);
+	public void renderFillRect(final double x, final double y, final double w, final double h, final Color color);
 
-	public void renderImage(double x, double y, Image image);
+	public void renderImage(final double x, final double y, final Image image);
 
-	public void renderRect(double x, double y, double w, double h, Color color, double lineWidth);
+	public void renderImage(final double x, final double y, final Image image, final double w, final double h);
+
+	public void renderRect(final double x, final double y, final double w, final double h, final Color color,
+			final double lineWidth);
 }

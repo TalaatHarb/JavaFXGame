@@ -1,23 +1,40 @@
 package io.github.talaatharb.javafxgame.entity;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import io.github.talaatharb.javafxgame.graphics.Renderer;
 import io.github.talaatharb.javafxgame.input.GameInput;
 import io.github.talaatharb.javafxgame.scene.GameScene;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 public class SimpleTestPlayer implements Entity {
 
 	private final static double SIZE = 20.0;
 	private final static double SPEED = 3.0;
 	private GameScene gameScene;
-	private double x = 30.0;
-	private double xSpeed = SPEED;
-	private double y = 30.0;
-	private double ySpeed = SPEED;
+	private Image image;
+	private double x;
+	private double xSpeed;
+	private double y;
+	private double ySpeed;
+
+	public SimpleTestPlayer() {
+		x = 30.0;
+		y = 30.0;
+		xSpeed = SPEED;
+		ySpeed = SPEED;
+		try {
+			image = new Image(new FileInputStream(new File("res\\testPlayer.png")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void render(final Renderer renderer) {
-		renderer.renderFillRect(x, y, SIZE, SIZE, Color.BLACK);
+		renderer.renderImage(x, y, image, SIZE, SIZE);
 	}
 
 	@Override

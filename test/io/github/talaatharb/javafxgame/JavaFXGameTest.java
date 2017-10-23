@@ -1,6 +1,7 @@
 package io.github.talaatharb.javafxgame;
 
 import io.github.talaatharb.javafxgame.game.JavaFXGame;
+import io.github.talaatharb.javafxgame.scene.TestGameScenes;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
