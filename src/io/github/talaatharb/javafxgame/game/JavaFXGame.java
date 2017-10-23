@@ -22,7 +22,7 @@ public class JavaFXGame implements Runnable, Updatable, Renderable {
 	private final Canvas canvas;
 	private volatile GameScene gameScene;
 	private final int height;
-	private final GameInput input;
+	protected final GameInput input;
 	private final Renderer renderer;
 	private final Group root;
 	private final Scene scene;
@@ -116,6 +116,11 @@ public class JavaFXGame implements Runnable, Updatable, Renderable {
 
 	@Override
 	public void update(final double t) {
+		updateInput();
 		gameScene.update(t);
+	}
+
+	protected void updateInput() {
+		
 	}
 }

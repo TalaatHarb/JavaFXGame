@@ -10,15 +10,13 @@ import javafx.scene.paint.Color;
 
 public class TestGameScene extends GameScene {
 
-	private final static int COUNT = 1000;
-
 	private Color backgroundColor;
 
-	public TestGameScene(final Color color) {
+	public TestGameScene(final Color color, int count) {
 		this.backgroundColor = color;
 		entities = new ArrayList<Entity>();
 		addEntity(new SimpleTestPlayer());
-		for (int i = 0; i < COUNT; i++) {
+		for (int i = 0; i < count; i++) {
 			addEntity(new SimpleTestObject());
 		}
 	}
