@@ -1,8 +1,11 @@
 package io.github.talaatharb.javafxgame.game;
 
-import io.github.talaatharb.javafxgame.graphics.Screen;
+import io.github.talaatharb.javafxgame.entity.Renderable;
+import io.github.talaatharb.javafxgame.entity.Updatable;
+import io.github.talaatharb.javafxgame.graphics.Renderer;
+import io.github.talaatharb.javafxgame.graphics.Renderer2D;
 import io.github.talaatharb.javafxgame.input.GameInput;
-import io.github.talaatharb.javafxgame.level.GameLevel;
+import io.github.talaatharb.javafxgame.scene.GameScene;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -10,43 +13,39 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 
-public class JavaFXGame implements Runnable {
+public class JavaFXGame implements Runnable, Updatable, Renderable {
 
 	public final static int DEFAULT_HEIGHT = 360;
 	public final static String DEFAULT_TITLE = "Game";
 	public final static int DEFAULT_WIDTH = 640;
 	protected static final double NANO_CONVERT = 1000000000.0;
 	private final Canvas canvas;
+	private volatile GameScene gameScene;
 	private final int height;
 	private final GameInput input;
-	private volatile GameLevel level = GameLevel.DEFAULT_LEVEL;
+	private final Renderer renderer;
 	private final Group root;
 	private final Scene scene;
-	private final Screen screen;
 	private final String title;
 	private final int width;
 
-	public JavaFXGame(GameLevel level) {
-		this(DEFAULT_TITLE, DEFAULT_WIDTH, DEFAULT_HEIGHT, level);
+	public JavaFXGame(GameScene gameScene) {
+		this(DEFAULT_TITLE, DEFAULT_WIDTH, DEFAULT_HEIGHT, gameScene);
 	}
 
-	public JavaFXGame(String title, int width, int height, GameLevel level) {
+	public JavaFXGame(final String title, final int width, final int height, final GameScene gameScene) {
 		this.title = title;
 		this.width = width;
 		this.height = height;
-		this.level = level;
+		this.gameScene = gameScene;
 		input = new GameInput();
-		level.setConfiguration(this);
+		this.gameScene.setConfiguration(this);
 		root = new Group();
 		canvas = new Canvas(width, height);
 		root.getChildren().add(canvas);
 		scene = new Scene(root);
-		screen = new Screen(canvas.getGraphicsContext2D(), width, height);
+		renderer = new Renderer2D(canvas.getGraphicsContext2D(), width, height);
 		initInput();
-	}
-
-	public Scene getGameScene() {
-		return scene;
 	}
 
 	public int getHeight() {
@@ -55,6 +54,10 @@ public class JavaFXGame implements Runnable {
 
 	public GameInput getInput() {
 		return input;
+	}
+
+	public Scene getScene() {
+		return scene;
 	}
 
 	public String getTitle() {
@@ -81,9 +84,10 @@ public class JavaFXGame implements Runnable {
 		});
 	}
 
-	protected void render() {
-		screen.clear();
-		level.render(screen);
+	@Override
+	public void render(Renderer renderer) {
+		renderer.clear();
+		gameScene.render(renderer);
 	}
 
 	@Override
@@ -96,16 +100,22 @@ public class JavaFXGame implements Runnable {
 			public void handle(long currentNanoTime) {
 				t = (currentNanoTime - startTime) / NANO_CONVERT;
 				update(t);
-				render();
+				render(renderer);
 			}
 		}.start();
+	}
+
+	public synchronized void setGameScene(final GameScene gameScene) {
+		gameScene.setConfiguration(this);
+		this.gameScene = gameScene;
 	}
 
 	public void start() {
 		new Thread(this).start();
 	}
 
-	protected void update(final double t) {
-		level.update(t);
+	@Override
+	public void update(final double t) {
+		gameScene.update(t);
 	}
 }

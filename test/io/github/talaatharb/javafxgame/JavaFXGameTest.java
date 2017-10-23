@@ -1,7 +1,6 @@
 package io.github.talaatharb.javafxgame;
 
 import io.github.talaatharb.javafxgame.game.JavaFXGame;
-import io.github.talaatharb.javafxgame.level.GameLevel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -15,8 +14,8 @@ public class JavaFXGameTest extends Application {
 	@Override
 	public void start(Stage primaryStage) throws RuntimeException {
 		try {
-			JavaFXGame game = new JavaFXGame(GameLevel.DEFAULT_LEVEL);
-			primaryStage.setScene(game.getGameScene());
+			JavaFXGame game = new JavaFXGame(TestGameScenes.TEST_SCENE01);
+			primaryStage.setScene(game.getScene());
 			primaryStage.setTitle(game.getTitle());
 			// primaryStage.setAlwaysOnTop(true);
 			primaryStage.initStyle(StageStyle.UNDECORATED);

@@ -2,23 +2,22 @@ package io.github.talaatharb.javafxgame.entity;
 
 import java.util.Random;
 
-import io.github.talaatharb.javafxgame.graphics.Screen;
-import io.github.talaatharb.javafxgame.level.GameLevel;
+import io.github.talaatharb.javafxgame.graphics.Renderer;
+import io.github.talaatharb.javafxgame.scene.GameScene;
 import javafx.scene.paint.Color;
 
-public class SimpleObject implements Entity {
+public class SimpleTestObject implements Entity {
 
 	private final static double SIZE = 20.0;
 	private final static double SPEED = 3.0;
-	private GameLevel level;
+	private Color color;
+	private Random random;
 	private double x = 30.0;
 	private double xSpeed;
 	private double y = 30.0;
 	private double ySpeed;
-	private Random random;
-	private Color color;
 
-	public SimpleObject() {
+	public SimpleTestObject() {
 		random = new Random();
 		xSpeed = random.nextDouble() * 2 * SPEED - SPEED;
 		ySpeed = random.nextDouble() * 2 * SPEED - SPEED;
@@ -26,15 +25,14 @@ public class SimpleObject implements Entity {
 	}
 
 	@Override
-	public void render(final Screen screen) {
-		screen.renderFillRect(x, y, SIZE, SIZE, color);
+	public void render(final Renderer renderer) {
+		renderer.renderFillRect(x, y, SIZE, SIZE, color);
 	}
 
 	@Override
-	public void setLevel(final GameLevel gameLevel) {
-		this.level = gameLevel;
-		x = random.nextDouble() * (level.getWidth() - x) + x;
-		y = random.nextDouble() * (level.getHeight() - y) + y;
+	public void setGameScene(final GameScene gameScene) {
+		x = random.nextDouble() * (gameScene.getWidth() - x) + x;
+		y = random.nextDouble() * (gameScene.getHeight() - y) + y;
 	}
 
 	@Override

@@ -1,14 +1,14 @@
 package io.github.talaatharb.javafxgame.entity;
 
-import io.github.talaatharb.javafxgame.graphics.Screen;
-import io.github.talaatharb.javafxgame.level.GameLevel;
+import io.github.talaatharb.javafxgame.scene.GameScene;
 
-public interface Entity {
+public interface Entity extends Updatable, Renderable {
 
-	public abstract void render(Screen screen);
-
-	public abstract void setLevel(GameLevel gameLevel);
-
-	public abstract void update(double t);
-
+	/**
+	 * Every entity has to belong to a game scene
+	 * 
+	 * @param gameScene
+	 *            The game scene of this entity
+	 */
+	public abstract void setGameScene(final GameScene gameScene);
 }
