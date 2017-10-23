@@ -42,7 +42,7 @@ public abstract class GameScene implements Updatable, Renderable {
 		renderBackground(renderer);
 
 		// Render Entities
-		for (int i = 0; i < entities.size(); i++) {
+		for (int i = entities.size() - 1; i >= 0; i--) {
 			entities.get(i).render(renderer);
 		}
 	}

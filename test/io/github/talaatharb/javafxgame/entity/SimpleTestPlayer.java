@@ -17,7 +17,7 @@ public class SimpleTestPlayer implements Entity {
 
 	@Override
 	public void render(final Renderer renderer) {
-		renderer.renderFillRect(x, y, SIZE, SIZE, Color.CORNFLOWERBLUE);
+		renderer.renderFillRect(x, y, SIZE, SIZE, Color.BLACK);
 	}
 
 	@Override
