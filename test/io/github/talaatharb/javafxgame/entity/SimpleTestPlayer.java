@@ -5,9 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import io.github.talaatharb.javafxgame.graphics.Renderer;
-import io.github.talaatharb.javafxgame.input.GameInput;
 import io.github.talaatharb.javafxgame.scene.GameScene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 
 public class SimpleTestPlayer implements Entity {
 
@@ -45,13 +45,13 @@ public class SimpleTestPlayer implements Entity {
 	@Override
 	public void update(final double t) {
 		// Input
-		if (gameScene.getInput().isKeyPressed(GameInput.KEY_DOWN)) {
+		if (gameScene.getInput().isKeyPressed(KeyCode.DOWN)) {
 			ySpeed = SPEED;
-		} else if (gameScene.getInput().isKeyPressed(GameInput.KEY_UP)) {
+		} else if (gameScene.getInput().isKeyPressed(KeyCode.UP)) {
 			ySpeed = -SPEED;
-		} else if (gameScene.getInput().isKeyPressed(GameInput.KEY_LEFT)) {
+		} else if (gameScene.getInput().isKeyPressed(KeyCode.LEFT)) {
 			xSpeed = -SPEED;
-		} else if (gameScene.getInput().isKeyPressed(GameInput.KEY_RIGHT)) {
+		} else if (gameScene.getInput().isKeyPressed(KeyCode.RIGHT)) {
 			xSpeed = SPEED;
 		}
 

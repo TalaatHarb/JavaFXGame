@@ -72,14 +72,14 @@ public class JavaFXGame implements Runnable, Updatable, Renderable {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
-				input.press(e.getCode().toString());
+				input.press(e.getCode());
 			}
 		});
 
 		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
-				input.release(e.getCode().toString());
+				input.release(e.getCode());
 			}
 		});
 	}

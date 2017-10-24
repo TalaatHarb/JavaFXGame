@@ -3,37 +3,29 @@ package io.github.talaatharb.javafxgame.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.input.KeyCode;
+
 public class GameInput {
 
 	private final static int DEFAULT_SIZE = 3;
-	public final static String KEY_ALT = "ALT";
-	public final static String KEY_CTRL = "CONTROL";
-	public final static String KEY_DOWN = "DOWN";
-	public final static String KEY_ENTER = "ENTER";
-	public final static String KEY_ESC = "ESCAPE";
-	public final static String KEY_LEFT = "LEFT";
-	public final static String KEY_RIGHT = "RIGHT";
-	public final static String KEY_SHIFT = "SHIFT";
-	public final static String KEY_SPACE = "SPACE";
-	public final static String KEY_UP = "UP";
 
-	private final List<String> keys;
+	private final List<KeyCode> keys;
 
 	public GameInput() {
-		keys = new ArrayList<String>(DEFAULT_SIZE);
+		keys = new ArrayList<KeyCode>(DEFAULT_SIZE);
 	}
 
-	public final boolean isKeyPressed(String keyCode) {
+	public final boolean isKeyPressed(KeyCode keyCode) {
 		return keys.contains(keyCode);
 	}
 
-	public final void press(String keyCode) {
+	public final void press(KeyCode keyCode) {
 		if (!keys.contains(keyCode)) {
 			keys.add(keyCode);
 		}
 	}
 
-	public void release(String keyCode) {
+	public void release(KeyCode keyCode) {
 		keys.remove(keyCode);
 	}
 }
