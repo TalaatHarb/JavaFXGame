@@ -13,15 +13,32 @@ import javafx.scene.input.KeyCode;
 
 public abstract class GameScene implements Updatable, Renderable {
 
-	protected List<Entity> entities;
-	private GameInput input;
+	private final static double DEFAULT_H = 360.0;
+	private final static double DEFAULT_W = 640.0;
 
+	protected List<Entity> entities;
+	private JavaFXGame game;
+
+	private GameInput input;
 	private double screenHeight;
 	private double screenWidth;
+
+	public GameScene() {
+		this(DEFAULT_W, DEFAULT_H);
+	}
+
+	public GameScene(final double screenWidth, final double screenHeight) {
+		this.screenHeight = screenHeight;
+		this.screenWidth = screenWidth;
+	}
 
 	public void addEntity(final Entity entity) {
 		entities.add(entity);
 		entity.setGameScene(this);
+	}
+
+	public JavaFXGame getGame() {
+		return game;
 	}
 
 	public double getHeight() {
@@ -51,6 +68,7 @@ public abstract class GameScene implements Updatable, Renderable {
 	protected abstract void renderBackground(final Renderer renderer);
 
 	public void setConfiguration(final JavaFXGame game) {
+		this.game = game;
 		this.input = game.getInput();
 		this.screenWidth = game.getWidth();
 		this.screenHeight = game.getHeight();
@@ -69,5 +87,4 @@ public abstract class GameScene implements Updatable, Renderable {
 			entities.get(i).update(t);
 		}
 	}
-
 }

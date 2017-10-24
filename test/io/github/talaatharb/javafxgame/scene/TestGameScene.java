@@ -21,6 +21,7 @@ public class TestGameScene extends GameScene {
 		}
 	}
 
+	@Override
 	protected void renderBackground(final Renderer renderer) {
 		renderer.renderFillRect(30, 30, 480, 300, backgroundColor);
 		renderer.renderRect(29, 29, 481, 301, Color.RED, 2);

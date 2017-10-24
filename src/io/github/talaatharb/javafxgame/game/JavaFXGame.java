@@ -121,6 +121,6 @@ public class JavaFXGame implements Runnable, Updatable, Renderable {
 	}
 
 	protected void updateInput() {
-		
+
 	}
 }

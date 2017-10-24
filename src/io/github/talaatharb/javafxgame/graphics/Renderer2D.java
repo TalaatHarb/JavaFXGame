@@ -49,7 +49,14 @@ public class Renderer2D implements Renderer {
 	}
 
 	@Override
-	public void renderRect(final double x, final double y, final double w, final double h, final Color color, final double lineWidth) {
+	public void renderLine(double x1, double y1, double x2, double y2, Color color) {
+		graphcisContext.setStroke(color);
+		graphcisContext.strokeLine(x1, y1, x2, y2);
+	}
+
+	@Override
+	public void renderRect(final double x, final double y, final double w, final double h, final Color color,
+			final double lineWidth) {
 		graphcisContext.setStroke(color);
 		graphcisContext.setLineWidth(lineWidth);
 		graphcisContext.strokeRect(x, y, w, h);
