@@ -3,6 +3,7 @@ package io.github.talaatharb.javafxgame;
 import io.github.talaatharb.javafxgame.game.JavaFXGame;
 import io.github.talaatharb.javafxgame.scene.TestGameScenes;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,6 +26,10 @@ public class JavaFXGameTest extends Application {
 					}
 					if (input.isKeyPressed(KeyCode.DIGIT1)) {
 						setGameScene(TestGameScenes.TEST_SCENE01);
+					}
+					if (input.isKeyPressed(KeyCode.ESCAPE)) {
+						Platform.exit();
+						System.exit(0);
 					}
 				}
 			};

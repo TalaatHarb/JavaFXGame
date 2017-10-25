@@ -8,8 +8,6 @@ import io.github.talaatharb.javafxgame.entity.Updatable;
 import io.github.talaatharb.javafxgame.game.JavaFXGame;
 import io.github.talaatharb.javafxgame.graphics.Renderer;
 import io.github.talaatharb.javafxgame.input.GameInput;
-import javafx.application.Platform;
-import javafx.scene.input.KeyCode;
 
 public abstract class GameScene implements Updatable, Renderable {
 
@@ -76,15 +74,15 @@ public abstract class GameScene implements Updatable, Renderable {
 
 	@Override
 	public void update(final double t) {
-		// Poll inputs
-		if (input.isKeyPressed(KeyCode.ESCAPE)) {
-			Platform.exit();
-			System.exit(0);
-		}
+		// Poll input
+		updateInput();
 
 		// Update entities
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(t);
 		}
+	}
+
+	protected void updateInput() {
 	}
 }

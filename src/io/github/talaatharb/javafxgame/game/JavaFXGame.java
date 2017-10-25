@@ -7,11 +7,9 @@ import io.github.talaatharb.javafxgame.graphics.Renderer2D;
 import io.github.talaatharb.javafxgame.input.GameInput;
 import io.github.talaatharb.javafxgame.scene.GameScene;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyEvent;
 
 public class JavaFXGame implements Runnable, Updatable, Renderable {
 
@@ -69,19 +67,10 @@ public class JavaFXGame implements Runnable, Updatable, Renderable {
 	}
 
 	private void initInput() {
-		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent e) {
-				input.press(e.getCode());
-			}
-		});
-
-		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent e) {
-				input.release(e.getCode());
-			}
-		});
+		scene.setOnKeyPressed(e -> input.press(e.getCode()));
+		scene.setOnKeyReleased(e -> input.release(e.getCode()));
+		scene.setOnMouseClicked(e -> input.click(e.getButton(), e.getX(), e.getY()));
+		scene.setOnMouseExited(e -> input.release(e.getButton()));
 	}
 
 	@Override
